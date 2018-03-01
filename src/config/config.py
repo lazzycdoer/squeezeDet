@@ -96,13 +96,13 @@ def base_model_config(dataset='PASCAL_VOC'):
   cfg.WEIGHT_DECAY = 0.0005
 
   # wether to load pre-trained model
-  cfg.LOAD_PRETRAINED_MODEL = True
+  cfg.LOAD_PRETRAINED_MODEL = False
 
   # path to load the pre-trained model
   cfg.PRETRAINED_MODEL_PATH = ''
 
   # print log to console in debug mode
-  cfg.DEBUG_MODE = False
+  cfg.DEBUG_MODE = True
 
   # a small value used to prevent numerical instability
   cfg.EPSILON = 1e-16

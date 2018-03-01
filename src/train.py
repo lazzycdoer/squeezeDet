@@ -26,16 +26,16 @@ FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_string('dataset', 'KITTI',
                            """Currently only support KITTI dataset.""")
-tf.app.flags.DEFINE_string('data_path', '', """Root directory of data""")
+tf.app.flags.DEFINE_string('data_path', '../data/KITTI/', """Root directory of data""")
 tf.app.flags.DEFINE_string('image_set', 'train',
                            """ Can be train, trainval, val, or test""")
 tf.app.flags.DEFINE_string('year', '2007',
                             """VOC challenge year. 2007 or 2012"""
                             """Only used for Pascal VOC dataset""")
-tf.app.flags.DEFINE_string('train_dir', '/tmp/bichen/logs/squeezeDet/train',
+tf.app.flags.DEFINE_string('train_dir', './logs/squeezeDet/train',
                             """Directory where to write event logs """
                             """and checkpoint.""")
-tf.app.flags.DEFINE_integer('max_steps', 1000000,
+tf.app.flags.DEFINE_integer('max_steps', 100,
                             """Maximum number of batches to run.""")
 tf.app.flags.DEFINE_string('net', 'squeezeDet',
                            """Neural net architecture. """)
@@ -232,8 +232,8 @@ def train():
             print ("added to the queue")
         if mc.DEBUG_MODE:
           print ("Finished enqueue")
-      except Exception, e:
-        coord.request_stop(e)
+      except :
+        coord.request_stop()
 
     sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
 
@@ -263,7 +263,7 @@ def train():
     run_options = tf.RunOptions(timeout_in_ms=60000)
 
     # try: 
-    for step in xrange(FLAGS.max_steps):
+    for step in range(FLAGS.max_steps):
       if coord.should_stop():
         sess.run(model.FIFOQueue.close(cancel_pending_enqueues=True))
         coord.request_stop()

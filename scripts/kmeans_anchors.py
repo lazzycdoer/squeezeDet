@@ -89,7 +89,7 @@ def get_entry_metadata(dataset_root, entry, input_w, input_h):
     try:
         out = subprocess.check_output(id_cmd)
     except subprocess.CalledProcessError:
-        print 'Unable to process entry', entry, '(ignoring)'
+        print('Unable to process entry', entry, '(ignoring)')
         return None
 
     img_w, img_h = [int(x) for x in out.split('x')]
@@ -146,7 +146,7 @@ def print_nicely(centroids):
                 space = ''
         out += comma + space + newline
     out += ']'
-    print out
+    print(out)
 
 
 
